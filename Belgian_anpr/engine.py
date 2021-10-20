@@ -178,14 +178,10 @@ def detect_belg(src):
 def process(src):
 
     # Brigthness and contrast adjustment
-    cv2.imwrite("temp/steps/3_detected_plate.png", src)
     adjusted, a, b = automatic_brightness_and_contrast(src)
-    cv2.imwrite("temp/steps/4_Brigthness_contrast_adjustment.png", adjusted)
     # BGR to gray
     gray = cv2.cvtColor(adjusted, cv2.COLOR_BGR2GRAY)
-    cv2.imwrite("temp/steps/5_gray.png", gray)
     # Binary thresh
     #ret, th = cv2.threshold(gray, 140, 255, cv2.THRESH_BINARY)
     ret, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
-    cv2.imwrite("temp/steps/6_threshold.png", th)
     return th
